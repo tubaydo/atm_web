@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TC Kimlik No Giriş</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/t.jpg'); /* Arka plan resmi */
+            background-size: cover;
+            background-position: center;
+            filter: blur(3px); /* Arka planı bulanıklaştırır */
+            z-index: -1; /* Arka planda kalmasını sağlar */
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.862);
+            padding: 30px; /* Daha fazla iç boşluk */
+            border-radius: 10px;
+            box-shadow: 0 5px 9px rgba(0, 0, 0, 0.2);
+            width: 300px; /* Daha geniş kutu */
+            height: 250px; /* Yüksekliği otomatik ayarla */
+        }
+
+        .input-container {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 220px; /* Daha geniş kutu */
+            height: 50px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        button {
+            position: absolute;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            bottom: 30px; /* Alt taraftan mesafe */
+            left: 90px; /* Sol taraftan mesafe */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            background-color: black; /* Üzerine gelindiğinde arka plan rengi */
+            transform: scale(1.1); /* Üzerine gelindiğinde biraz büyütme */
+        }
+
+        button:active {
+            background-color: #004085;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <form id="tc-form" onsubmit="handleSubmit(event)">
+            <div class="input-container">
+                <label for="tcno">TC Kimlik Numaranız:</label>
+                <br>
+                <input type="text" id="tcno" name="tcno" maxlength="11" required pattern="\d{11}" placeholder="12345678901">
+            </div>
+            <button type="submit">Giriş Yap</button>
+        </form>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Formun varsayılan gönderimini engeller
+            window.location.href = 'donation.html'; // Yönlendirme işlemi
+        }
+    </script>
+</body>
+</html>

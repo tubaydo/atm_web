@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bekleyiniz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/t.jpg'); /* Arka plan resmi */
+            background-size: cover;
+            background-position: center;
+            filter: blur(3px); /* Arka planı bulanıklaştırır */
+            z-index: -1; /* Arka planda kalmasını sağlar */
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Yarı saydam arka plan */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 9px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+        }
+
+        .container p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #007BFF;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <p>Bekleyiniz, işleminiz gerçekleştiriliyor...</p>
+        <div class="loader"></div>
+    </div>
+
+    <script>
+        // Sayfa yüklendiğinde yönlendirme başlar
+        setTimeout(function() {
+            window.location.href = 'thanks.html'; // Yönlendirmek istediğiniz sayfanın yolu
+        }, 3000); // 3000 milisaniye = 3 saniye
+    </script>
+</body>
+</html>

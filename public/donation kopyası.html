@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bağış Ekranı</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/t.jpg'); /* Arka plan resmi */
+            background-size: cover;
+            background-position: center;
+            filter: blur(3px); /* Arka planı bulanıklaştırır */
+            z-index: -1; /* Arka planda kalmasını sağlar */
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.862);
+            padding: 30px; /* Daha fazla iç boşluk */
+            border-radius: 10px;
+            box-shadow: 0 5px 9px rgba(0, 0, 0, 0.2);
+            width: 570px; /* Daha geniş kutu */
+            height: 150px; /* Yüksekliği otomatik ayarla */
+            text-align: center;
+        }
+
+        .container p {
+            font-weight: bold; /* Daha kalın metin için */
+            font-size: 22px; /* Yazı boyutunu da artırabilirsiniz */
+        }
+
+        .countdown {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <p>Lütfen bağış yapmak istediğiniz parayı ATM'ye yerleştiriniz.</p>
+        <div class="countdown" id="countdown">5 sn</div>
+    </div>
+
+    <script>
+        var countdownElement = document.getElementById('countdown');
+        var countdownTime = 5; // Başlangıç süresi (saniye)
+
+        function updateCountdown() {
+            countdownElement.textContent = countdownTime + ' sn sonra yönlendirileceksiniz...'; // Saniyeleri gösterir
+            countdownTime--;
+            if (countdownTime < 0) {
+                window.location.href = 'loading.html'; // Yönlendirmek istediğiniz sayfanın yolu
+            }
+        }
+
+        // Her saniye countdown güncellenir
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
