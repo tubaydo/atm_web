@@ -4,14 +4,14 @@ import { getDatabase, ref, get, set } from 'firebase/database';
 import '../styles/selectarea.css';
 
 const areas = [
-  { id: 1, name: 'Yardıma Muhtaç Aileler', image: 's.png' },
-  { id: 2, name: 'Eğitim Desteği', image: 's.png' },
-  { id: 3, name: 'Üniversite Öğrencileri', image: 's.png' },
-  { id: 4, name: 'Kızılay ve Yeşilay', image: 's.png' },
-  { id: 5, name: 'Darüşşakafa', image: 's.png' },
-  { id: 6, name: 'Darülaceze', image: 's.png' },
-  { id: 7, name: 'LÖSEV', image: 's.png' },
-  { id: 8, name: 'Camii ve İbadethaneler', image: 's.png' },
+  { id: 1, name: 'Yardıma Muhtaç Aileler', image: 'aile.png' },
+  { id: 2, name: 'Eğitim Desteği', image: 'eğitim.png' },
+  { id: 3, name: 'Üniversite Öğrencileri', image: 'uni.png' },
+  { id: 4, name: 'Camii ve İbadethaneler', image: 'camii.png' },
+  { id: 5, name: 'Kızılay ve Yeşilay', image: 'kızılay.png' },
+  { id: 6, name: 'Darüşşakafa', image: 'darüssafaka.png' },
+  { id: 7, name: 'Darülaceze', image: 'darülaceze.png' },
+  { id: 8, name: 'LÖSEV', image: 'losev.png' },
 ];
 
 function SelectArea() {
