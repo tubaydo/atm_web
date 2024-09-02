@@ -22,6 +22,11 @@ const Thanks = () => {
       }
     };
 
+    fetchWebValue(); // `web` değerini ilk önce al
+
+  }, []); // Boş bağımlılık dizisi ile sadece bileşen ilk render edildiğinde çağrılır
+
+  useEffect(() => {
     const fetchDonationAmount = async () => {
       const db = getDatabase();
       const donationRef = ref(db, 'toplampara');
@@ -60,15 +65,9 @@ const Thanks = () => {
       return () => clearTimeout(timer);
     };
 
-    fetchWebValue();
-
     if (webValue !== null) {
-      fetchDonationAmount();
+      fetchDonationAmount(); // `web` değeri güncellenince bağış miktarını al
     }
-
-    return () => {
-      localStorage.removeItem('currentDonation');
-    };
 
   }, [webValue]);
 
