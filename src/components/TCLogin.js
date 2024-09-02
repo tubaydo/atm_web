@@ -1,54 +1,36 @@
 import React from 'react';
 import { auth, db } from '../firebase'; // Firebase'i import edin
-import { signInWithCustomToken, signInAnonymously } from 'firebase/auth';
+import { signInAnonymously } from 'firebase/auth'; // signInWithCustomToken kaldırıldı
 import { doc, setDoc } from 'firebase/firestore';
 import '../styles/tclogin.css'; // CSS dosyasını import edin
-
-const generateCustomToken = async (tcno) => {
-  try {
-    const response = await fetch('http://localhost:5001/generateCustomToken', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ tcno }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Token oluşturulamadı');
-    }
-
-    const data = await response.json();
-    return data.token;
-  } catch (error) {
-    console.error('Giriş yapılamadı:', error);
-    throw error; // Hata mesajını göstermek için
-  }
-};
 
 const TCLogin = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const tcno = event.target.tcno.value;
 
-    try {
-      // Custom token'ı al ve oturum aç
-      const customToken = await generateCustomToken(tcno);
-      console.log('Custom Token:', customToken); // Token'ı logla
-      const userCredential = await signInWithCustomToken(auth, customToken);
-      const user = userCredential.user;
-      console.log('User:', user); // Kullanıcıyı logla
+    // 11 haneli bir sayı kontrolü
+    if (tcno.length === 11 && /^\d+$/.test(tcno)) {
+      try {
+        // TC Kimlik Numarası geçerli olduğunda anonim olarak oturum aç
+        const userCredential = await signInAnonymously(auth);
+        const user = userCredential.user;
+        console.log('Anonim kullanıcı:', user);
 
-      // Firestore'a kullanıcıyı kaydet
-      await setDoc(doc(db, "users", user.uid), {
-        tcno: tcno,
-        createdAt: new Date().toISOString(),
-      });
+        // Firestore'a kullanıcıyı kaydet
+        await setDoc(doc(db, "users", user.uid), {
+          tcno: tcno,
+          createdAt: new Date().toISOString(),
+        });
 
-      // Yönlendirme
-      window.location.href = '/select-area'; // Yeni URL
-    } catch (error) {
-      console.error("Giriş yapılamadı: ", error);
+        // Yönlendirme
+        window.location.href = '/select-area'; // Yeni URL
+      } catch (error) {
+        console.error("Anonim giriş yapılamadı: ", error);
+        alert('Giriş yapılamadı: ' + error.message);
+      }
+    } else {
+      alert('Lütfen geçerli 11 haneli bir TC Kimlik Numarası girin.');
     }
   };
 
@@ -68,6 +50,7 @@ const TCLogin = () => {
       window.location.href = '/select-area'; // Yeni URL
     } catch (error) {
       console.error("Anonim giriş yapılamadı: ", error);
+      alert('Giriş yapılamadı: ' + error.message);
     }
   };
 
